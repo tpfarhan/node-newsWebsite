@@ -1,0 +1,24 @@
+{
+  "name": "newswebsite",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html --public-url ./"
+  },
+  "keywords": [],
+  "author": "farhan",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tpfarhan/node-newsWebsite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tpfarhan/node-newsWebsite/issues"
+  },
+  "homepage": "https://github.com/tpfarhan/node-newsWebsite#readme",
+  "description": "",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}

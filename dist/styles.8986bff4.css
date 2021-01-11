@@ -1,0 +1,124 @@
+body{
+    font-family: 'Noto Sans JP', sans-serif;
+    margin: 0;
+}
+/*.header{
+    z-index: 0;
+}*/
+.head-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.icon{
+   
+}
+.close{
+    position: absolute;
+    color:white;
+    font-weight: bold;
+    top : 1.2em; 
+    left: 4.5em;
+    z-index: 100;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    border: none;
+    font-size: 2em;
+}
+#menu-btn{
+    border: none;
+    background: none;
+}
+#menu-btn:hover{
+    color: red;
+}
+.overlay{
+    display: none;
+    position: absolute;
+    background-color: black;
+    opacity: 50%;
+    height: 100vh;
+    width: 100%;
+    z-index: 5;
+}
+.fadein{
+    animation: fadein 1s;
+}
+@keyframes fadein{
+    from{
+        display: block;
+        opacity:0%;
+    }
+    to{
+        opacity:50%;
+    }
+}
+.fadeout{
+    animation:fadeout 1s;
+}
+@keyframes fadeout{
+    from{
+        opacity: 50%;
+    }
+    to{
+        display: none;
+        opacity: 0%;
+    }
+}
+
+.menu-list{
+    display: none;
+    position: fixed;
+    justify-content: start;
+    left: 0;
+    background-color: black;
+    opacity: 50%;
+    height: 100vh;
+    z-index: 10;
+    top: 0;
+    display: inline;
+    
+}
+.openSlide{
+    animation: openSlide 1s;
+}
+@keyframes openSlide{
+    from{
+        width: 0px;
+    }
+    to{
+        width: 200px;
+    }
+}
+.closeSlide{
+    animation: closeSlide 1s;
+}
+@keyframes closeSlide{
+    from{
+        width: 200px;
+    }
+    to{
+        width: 0px;
+    }
+}
+.menu-list ul{
+    list-style-type: none;
+    padding-top:5em;
+    padding-right: 4em;
+    padding-left: 4em;
+}
+.menu-list li{
+    padding-top : 1em;
+    
+}
+.menu-list a{
+    color: white;
+    text-decoration: none;
+    
+}
+
+/*# sourceMappingURL=/styles.8986bff4.css.map */
