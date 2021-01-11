@@ -118,27 +118,21 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"js/index.js":[function(require,module,exports) {
-var menuBtn = document.getElementById("menu-btn"),
-    fullOverlay = document.getElementById("overlay"),
-    menuOverlay = document.getElementById("menuList"),
-    close = document.getElementById("close");
+var navigation = document.getElementById("navigation"),
+    close = document.getElementById("close"),
+    menuBtn = document.getElementById("menu-btn"),
+    fullOverlay = document.getElementById("overlay");
 menuBtn.addEventListener("click", function () {
+  navigation.style.width = "15em";
   fullOverlay.style.display = "block";
-  menuOverlay.style.display = "block";
   fullOverlay.classList.remove("fadeout");
   fullOverlay.classList.add("fadein");
-  menuOverlay.classList.remove("closeSlide");
-  menuOverlay.classList.add("openSlide");
 });
 close.addEventListener("click", function () {
-  console.log("click");
-  fullOverlay.classList.remove("fadein");
+  navigation.style.width = "0";
   fullOverlay.classList.add("fadeout");
-  menuOverlay.classList.remove("openSlide");
-  menuOverlay.classList.add("closeSlide");
   setTimeout(function () {
     fullOverlay.style.display = "none";
-    menuOverlay.style.display = "none";
   }, 1000);
 });
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {

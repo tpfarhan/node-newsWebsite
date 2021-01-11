@@ -2,17 +2,100 @@ body{
     font-family: 'Noto Sans JP', sans-serif;
     margin: 0;
 }
-/*.header{
-    z-index: 0;
-}*/
+
 .head-container{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    padding: 0em;
+    justify-content: space-between;
+    padding-left:2em;
+    padding-right: 2em;;
     padding-top: 1em;
-    padding-bottom: 1em;
 }
+.navigation {
+    height: 100%;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: black;
+    opacity: 75%;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 2em;
+    width:0;
+  }
+
+  .navigation ul{
+    list-style-type: none;
+    padding-top:4em;
+    padding-right: 4em;
+    padding-left: 4em;
+}
+.navigation li{
+    padding-top : 1em;
+    
+}
+.navigation a{
+    color: white;
+    text-decoration: none;
+    transition: 10s;
+    
+}
+.closeBtn {
+    position: absolute;
+    color:white;
+    font-weight: bold;
+    top : 1.2em; 
+    left: 5.3em;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    border: none;
+    font-size: 2em;
+  }
+.overlay{
+    display: none;
+    position: absolute;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    /*animation: fadein 1s;*/
+    background-color: black;
+    opacity: 50%;
+    z-index: 1;
+  }
+  .fadein{
+    animation: fadein 1s;
+}
+@keyframes fadein{
+    from{
+        display: block;
+        opacity:0%;
+    }
+    to{
+        opacity:50%;
+    }
+}
+.fadeout{
+    animation:fadeout 1s;
+}
+@keyframes fadeout{
+    from{
+        opacity: 50%;
+    }
+    to{
+        opacity: 0%;
+    }
+}
+  #menu-btn{
+    border: none;
+    background: none;
+    z-index: -1;
+}
+#menu-btn:hover{
+    color: red;
+}
+/*
 .icon{
    
 }
@@ -29,13 +112,7 @@ body{
     border: none;
     font-size: 2em;
 }
-#menu-btn{
-    border: none;
-    background: none;
-}
-#menu-btn:hover{
-    color: red;
-}
+
 .overlay{
     display: none;
     position: absolute;
@@ -119,6 +196,6 @@ body{
     color: white;
     text-decoration: none;
     
-}
+}*/
 
 /*# sourceMappingURL=/styles.8986bff4.css.map */
