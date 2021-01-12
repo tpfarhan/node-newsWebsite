@@ -142,13 +142,87 @@ var News = function News(newsDataFromAPI) {
 
 var _default = News;
 exports.default = _default;
-},{}],"js/utils/mainNewsContent.js":[function(require,module,exports) {
+},{}],"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"js/utils/mainstyle.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"js/utils/mainNewsContent.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.createMainNews = createMainNews;
+
+require("./mainstyle.css");
 
 function createMainNews(newsObject) {
   var singleNews = document.createElement("div"),
@@ -159,7 +233,10 @@ function createMainNews(newsObject) {
       newsCategory = document.createElement("div"),
       newsHeading = document.createElement("div"),
       newsContent = document.createElement("div"),
-      readMore = document.createElement("div");
+      readMoreDiv = document.createElement("div"),
+      readMore = document.createElement("a"),
+      newsDataContainer = document.createElement("div"),
+      divider = document.createElement("div");
   singleNews.classList.add("single-news");
   imgContainer.classList.add("news-imgContainer");
   newsMeta.classList.add("news-meta");
@@ -167,28 +244,39 @@ function createMainNews(newsObject) {
   newsCategory.classList.add("category");
   newsHeading.classList.add("news-heading");
   newsContent.classList.add("news-content");
+  readMoreDiv.classList.add("readMoreDiv");
   readMore.classList.add("read-more");
+  newsDataContainer.classList.add("newsDataContainer");
+  divider.classList.add("divider");
+  var month = newsObject.date.toLocaleString('default', {
+    month: 'short'
+  });
+  var pubDay = "".concat(month, " ").concat(newsObject.date.getDate(), ", ").concat(newsObject.date.getFullYear(), " ");
   newsImg.setAttribute("src", newsObject.imgURL);
-  newsDate.innerHTML = newsObject.date;
+  newsDate.innerHTML = pubDay;
   newsCategory.innerHTML = newsObject.source;
   newsHeading.innerHTML = newsObject.title;
   newsContent.innerHTML = newsObject.description;
+  readMore.innerHTML = "Read More";
+  readMore.setAttribute("href", newsObject.newsURL);
   singleNews.appendChild(imgContainer);
   imgContainer.appendChild(newsImg);
-  singleNews.appendChild(newsMeta);
+  singleNews.appendChild(newsDataContainer);
+  newsDataContainer.appendChild(newsMeta);
   newsMeta.appendChild(newsDate);
+  newsMeta.appendChild(divider);
   newsMeta.appendChild(newsCategory);
-  singleNews.appendChild(newsHeading);
-  singleNews.appendChild(newsContent);
-  singleNews.appendChild(readMore);
+  newsDataContainer.appendChild(newsHeading);
+  newsDataContainer.appendChild(newsContent);
+  newsDataContainer.appendChild(readMore);
   return singleNews;
 }
-},{}],"js/index.js":[function(require,module,exports) {
+},{"./mainstyle.css":"js/utils/mainstyle.css"}],"js/index.js":[function(require,module,exports) {
 "use strict";
 
 var _newsAPI = _interopRequireDefault(require("./models/newsAPI"));
 
-var _mainNewsContent = _interopRequireDefault(require("./utils/mainNewsContent"));
+var _mainNewsContent = require("./utils/mainNewsContent");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -210,24 +298,28 @@ close.addEventListener("click", function () {
     fullOverlay.style.display = "none";
   }, 1000);
 });
+/*if(window.matchMedia("(min-width:1025px)")){
+    console.log(window.matchMedia("(min-width:1025px)"))
+    navigation.style.display="flex";
+    navigation.style.width="auto";
 
-if (window.matchMedia("(min-width:1025px)")) {
-  console.log(window.matchMedia("(min-width:1025px)"));
-  navigation.style.display = "flex";
-  navigation.style.width = "auto";
-}
+}-*/
 
 fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
   method: "GET"
 }).then(function (response) {
   return response.json();
 }).then(function (jsonResponse) {
-  if (jsonResponse.artcles) {
-    for (var i = 0; i < 8; i++) {
-      var newsData = new _newsAPI.default(jsonResponse.artcles[i]);
-      newsContainer.appendChild((0, _mainNewsContent.default)(newsdata));
+  if (jsonResponse.articles) {
+    console.log(jsonResponse.articles);
+
+    for (var i = 0; i < 6; i++) {
+      var newsData = new _newsAPI.default(jsonResponse.articles[i]);
+      newsContainer.appendChild((0, _mainNewsContent.createMainNews)(newsData));
     }
   }
+}).catch(function (error) {
+  console.log(error);
 });
 },{"./models/newsAPI":"js/models/newsAPI.js","./utils/mainNewsContent":"js/utils/mainNewsContent.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

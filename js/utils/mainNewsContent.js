@@ -1,4 +1,4 @@
-
+import "./mainstyle.css";
 function createMainNews(newsObject){
 
     var singleNews = document.createElement("div"),
@@ -9,8 +9,11 @@ function createMainNews(newsObject){
         newsCategory = document.createElement("div"),
         newsHeading = document.createElement("div"),
         newsContent = document.createElement("div"),
-        readMore = document.createElement("div")
-                    
+        readMoreDiv = document.createElement("div"),
+        readMore =document.createElement("a"),
+        newsDataContainer = document.createElement("div"),
+        divider = document.createElement("div")  
+        
     singleNews.classList.add("single-news");
     imgContainer.classList.add("news-imgContainer");
     newsMeta.classList.add("news-meta");
@@ -18,22 +21,31 @@ function createMainNews(newsObject){
     newsCategory.classList.add("category");
     newsHeading.classList.add("news-heading");
     newsContent.classList.add("news-content");
+    readMoreDiv.classList.add("readMoreDiv");
     readMore.classList.add("read-more");
+    newsDataContainer.classList.add("newsDataContainer")
+    divider.classList.add("divider");
 
+    var month = newsObject.date.toLocaleString('default', { month: 'short' });
+    var pubDay = `${month} ${newsObject.date.getDate()}, ${newsObject.date.getFullYear()} `;
     newsImg.setAttribute("src", newsObject.imgURL)
-    newsDate.innerHTML = newsObject.date;
+    newsDate.innerHTML = pubDay;
     newsCategory.innerHTML = newsObject.source;
     newsHeading.innerHTML = newsObject.title;
     newsContent.innerHTML = newsObject.description;
+    readMore.innerHTML = "Read More";
+    readMore.setAttribute("href", newsObject.newsURL)
             
     singleNews.appendChild(imgContainer);
         imgContainer.appendChild(newsImg);
-    singleNews.appendChild(newsMeta);
-        newsMeta.appendChild(newsDate);
-        newsMeta.appendChild(newsCategory);
-    singleNews.appendChild(newsHeading);
-    singleNews.appendChild(newsContent);
-    singleNews.appendChild(readMore)
+    singleNews.appendChild(newsDataContainer)
+        newsDataContainer.appendChild(newsMeta);
+            newsMeta.appendChild(newsDate);
+            newsMeta.appendChild(divider);
+            newsMeta.appendChild(newsCategory);
+        newsDataContainer.appendChild(newsHeading);
+        newsDataContainer.appendChild(newsContent);
+        newsDataContainer.appendChild(readMore)
 
     return singleNews;
 

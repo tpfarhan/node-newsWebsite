@@ -1,5 +1,5 @@
 import News from "./models/newsAPI"
-import createMainNews from "./utils/mainNewsContent"
+import {createMainNews} from "./utils/mainNewsContent"
 var navigation = document.getElementById("navigation"),
     close= document.getElementById("close"),
     menuBtn = document.getElementById("menu-btn"),
@@ -19,26 +19,32 @@ close.addEventListener("click",()=>{
         fullOverlay.style.display="none";
     }, 1000);
 })
-if(window.matchMedia("(min-width:1025px)")){
+/*if(window.matchMedia("(min-width:1025px)")){
     console.log(window.matchMedia("(min-width:1025px)"))
     navigation.style.display="flex";
     navigation.style.width="auto";
 
-}
+}-*/
 
 
 fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
     method: "GET"
 })
     .then((response) =>{
+        
         return response.json();
+        
     })
     .then((jsonResponse) =>{
-        if(jsonResponse.artcles){
-            for(var i = 0; i < 8 ; i++){
-                let newsData = new News(jsonResponse.artcles[i]);
-                newsContainer.appendChild(createMainNews(newsdata))
+        if(jsonResponse.articles){
+            console.log(jsonResponse.articles)
+            for(var i = 0; i < 6 ; i++){
+                var newsData = new News(jsonResponse.articles[i]);
+                newsContainer.appendChild(createMainNews(newsData))
             }
         }
     })
+    .catch((error) => {
+        console.log(error);
+      });
 
