@@ -117,11 +117,86 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/index.js":[function(require,module,exports) {
+})({"js/models/newsAPI.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var News = function News(newsDataFromAPI) {
+  _classCallCheck(this, News);
+
+  this.source = newsDataFromAPI.source.name;
+  this.author = newsDataFromAPI.author;
+  this.title = newsDataFromAPI.title;
+  this.description = newsDataFromAPI.description;
+  this.newsURL = newsDataFromAPI.url;
+  this.imgURL = newsDataFromAPI.urlToImage;
+  this.date = new Date(newsDataFromAPI.publishedAt);
+  this.content = newsDataFromAPI.content;
+};
+
+var _default = News;
+exports.default = _default;
+},{}],"js/utils/mainNewsContent.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createMainNews = createMainNews;
+
+function createMainNews(newsObject) {
+  var singleNews = document.createElement("div"),
+      imgContainer = document.createElement("div"),
+      newsImg = document.createElement("img"),
+      newsMeta = document.createElement("div"),
+      newsDate = document.createElement("div"),
+      newsCategory = document.createElement("div"),
+      newsHeading = document.createElement("div"),
+      newsContent = document.createElement("div"),
+      readMore = document.createElement("div");
+  singleNews.classList.add("single-news");
+  imgContainer.classList.add("news-imgContainer");
+  newsMeta.classList.add("news-meta");
+  newsDate.classList.add("date");
+  newsCategory.classList.add("category");
+  newsHeading.classList.add("news-heading");
+  newsContent.classList.add("news-content");
+  readMore.classList.add("read-more");
+  newsImg.setAttribute("src", newsObject.imgURL);
+  newsDate.innerHTML = newsObject.date;
+  newsCategory.innerHTML = newsObject.source;
+  newsHeading.innerHTML = newsObject.title;
+  newsContent.innerHTML = newsObject.description;
+  singleNews.appendChild(imgContainer);
+  imgContainer.appendChild(newsImg);
+  singleNews.appendChild(newsMeta);
+  newsMeta.appendChild(newsDate);
+  newsMeta.appendChild(newsCategory);
+  singleNews.appendChild(newsHeading);
+  singleNews.appendChild(newsContent);
+  singleNews.appendChild(readMore);
+  return singleNews;
+}
+},{}],"js/index.js":[function(require,module,exports) {
+"use strict";
+
+var _newsAPI = _interopRequireDefault(require("./models/newsAPI"));
+
+var _mainNewsContent = _interopRequireDefault(require("./utils/mainNewsContent"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var navigation = document.getElementById("navigation"),
     close = document.getElementById("close"),
     menuBtn = document.getElementById("menu-btn"),
-    fullOverlay = document.getElementById("overlay");
+    fullOverlay = document.getElementById("overlay"),
+    newsContainer = document.getElementById("news-container");
 menuBtn.addEventListener("click", function () {
   navigation.style.width = "15em";
   fullOverlay.style.display = "block";
@@ -141,7 +216,20 @@ if (window.matchMedia("(min-width:1025px)")) {
   navigation.style.display = "flex";
   navigation.style.width = "auto";
 }
-},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
+  method: "GET"
+}).then(function (response) {
+  return response.json();
+}).then(function (jsonResponse) {
+  if (jsonResponse.artcles) {
+    for (var i = 0; i < 8; i++) {
+      var newsData = new _newsAPI.default(jsonResponse.artcles[i]);
+      newsContainer.appendChild((0, _mainNewsContent.default)(newsdata));
+    }
+  }
+});
+},{"./models/newsAPI":"js/models/newsAPI.js","./utils/mainNewsContent":"js/utils/mainNewsContent.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

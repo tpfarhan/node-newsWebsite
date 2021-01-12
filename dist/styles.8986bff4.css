@@ -153,6 +153,33 @@ body{
     flex-direction: column;
 }
 
+.single-news{
+    display: flex;
+}
+.news-imgContainer{
+    width: auto;
+    height: 120px;
+}
+.news-imgContainer img{
+    width: inherit;
+    height: inherit;
+}
+
+.news-meta{
+    display: flex;
+    flex-wrap: wrap;
+    font-size : .6em;
+    color: rgb(190, 177, 177);
+}
+news-heading{
+    color: black;
+    font-size: 1.1em;
+    text-align: center;
+}
+.news-content{
+    text-decoration: italic;
+    font-size : .6em;
+}
 
 
 /*# sourceMappingURL=/styles.8986bff4.css.map */

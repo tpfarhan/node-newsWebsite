@@ -20,5 +20,8 @@
   "description": "",
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "m": "^1.5.6"
   }
 }
