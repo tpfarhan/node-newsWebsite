@@ -16,5 +16,10 @@ close.addEventListener("click",()=>{
     setTimeout(() => {
         fullOverlay.style.display="none";
     }, 1000);
-
 })
+if(window.matchMedia("(min-width:1025px)")){
+    console.log(window.matchMedia("(min-width:1025px)"))
+    navigation.style.display="flex";
+    navigation.style.width="auto";
+    
+}

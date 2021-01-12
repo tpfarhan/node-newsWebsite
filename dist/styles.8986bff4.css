@@ -37,9 +37,7 @@ body{
 }
 .navigation a{
     color: white;
-    text-decoration: none;
-    transition: 10s;
-    
+    text-decoration: none;  
 }
 .closeBtn {
     position: absolute;
@@ -95,107 +93,66 @@ body{
 #menu-btn:hover{
     color: red;
 }
-/*
-.icon{
-   
-}
-.close{
-    position: absolute;
-    color:white;
-    font-weight: bold;
-    top : 1.2em; 
-    left: 4.5em;
-    z-index: 100;
-    outline: none;
-    background: none;
-    cursor: pointer;
-    border: none;
-    font-size: 2em;
-}
-
-.overlay{
-    display: none;
-    position: absolute;
-    background-color: black;
-    opacity: 50%;
-    height: 100vh;
-    width: 100%;
-    z-index: 5;
-}
-.fadein{
-    animation: fadein 1s;
-}
-@keyframes fadein{
-    from{
-        display: block;
-        opacity:0%;
-    }
-    to{
-        opacity:50%;
-    }
-}
-.fadeout{
-    animation:fadeout 1s;
-}
-@keyframes fadeout{
-    from{
-        opacity: 50%;
-    }
-    to{
+@media only screen and (min-width:1025px){
+    #menu-btn{
         display: none;
-        opacity: 0%;
     }
+    .closeBtn{
+        display: none;
+    }
+    .head-container{
+        padding-left:7em;
+        padding-right: 7em;
+    }
+    .navigation{
+        background-color: white;
+        display: flex;
+        width:auto;
+        position: relative;
+        height: auto;
+        width:auto;
+        padding-top: 0;
+        padding-left: 8em;
+    }
+    .navigation ul{
+        display: flex;
+        width: 100vh;
+        justify-content: space-around;
+        list-style-type: none;
+        padding-top:0;
+        padding-right: 0;
+        padding-left: 0;
+        margin:0;
+    }
+    .navigation li{
+        padding-top : 0;
+        
+    }
+    .navigation a{
+        color:black;
+        text-decoration: none;
+    }
+    .navigation a:hover{
+        color: red;
+    }
+    .navigation a:focus{
+        color: green;
+    }
+    
+}
+.news-div{
+    background-color: rgb(181, 233, 204);
+    display: flex;
+    justify-content: center;
+}
+.heading{
+    font-size: 1.5em;
+}
+.news-container{
+    display: flex;
+    flex-direction: column;
 }
 
-.menu-list{
-    display: none;
-    position: fixed;
-    justify-content: start;
-    left: 0;
-    background-color: black;
-    opacity: 50%;
-    height: 100vh;
-    z-index: 10;
-    top: 0;
-    display: inline;
-    
-}
-.openSlide{
-    animation: openSlide 1s;
-}
-@keyframes openSlide{
-    from{
-        width: 0px;
-    }
-    to{
-        width: 200px;
-    }
-}
-.closeSlide{
-    animation: closeSlide 1s;
-}
-@keyframes closeSlide{
-    from{
-        width: 200px;
-    }
-    to{
-        width: 0px;
-    }
-}
-.menu-list ul{
-    list-style-type: none;
-    padding-top:5em;
-    padding-right: 4em;
-    padding-left: 4em;
-}
-.menu-list li{
-    padding-top : 1em;
-    
-}
-.menu-list a{
-    color: white;
-    text-decoration: none;
-    
-}*/
+
 
 /*# sourceMappingURL=/styles.8986bff4.css.map */
