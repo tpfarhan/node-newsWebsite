@@ -314,6 +314,7 @@ var _allNewsGenerator = require("./utils/allNewsGenerator");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var navigation = document.getElementById("navigation"),
+    navigationFull = document.getElementById("navigation-full"),
     close = document.getElementById("close"),
     menuBtn = document.getElementById("menu-btn"),
     fullOverlay = document.getElementById("overlay"),
@@ -321,6 +322,16 @@ var navigation = document.getElementById("navigation"),
 var headLineContainer = document.getElementById("headlines-container");
 var allImgContainer = document.getElementById("all-img-container");
 var newsContentContainer = document.getElementById("news-content-container");
+/*if(window.matchMedia("(min-width: 1025px)"))
+{
+    navigationFull.classList.remove("hidden")
+    navigation.classList.add("hidden")
+}
+if(window.matchMedia("(max-width: 1024px)")){
+    navigationFull.classList.add("hidden");
+    navigation.classList.remove("hidden");
+}*/
+
 menuBtn.addEventListener("click", function () {
   navigation.style.width = "15em";
   fullOverlay.style.display = "block";
@@ -415,7 +426,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41665" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43479" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

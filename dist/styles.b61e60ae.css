@@ -93,8 +93,11 @@ body{
   #menu-btn:hover{
     color: red;
   }
+  .hidden{
+      display: none;
+  }
   
-  @media only screen and (min-width:1025px){
+@media only screen and (min-width:1025px){
     #menu-btn{
         display: none;
     }
@@ -139,7 +142,7 @@ body{
     .navigation a:focus{
         color: green;
     }
-  }  
+}   
   
   .news-div{
     background-color: rgb(167, 189, 177);
@@ -190,9 +193,7 @@ body{
     margin: 6px -5px;
     background: rgb(129, 122, 122);
   }
-  /*.category::before{
-    border-left: 1px solid black
-  }*/
+ 
   .news-heading{
     color: black;
     font-size: 1em;
@@ -312,18 +313,6 @@ body{
   .published a{
     color: rgb(255, 0, 0)
   }
-  
-  /*headline page styling*/
-  
-  
-  
-  
-  /*All news Styling*/
-  
-  
-  
-  /*Styling for photos page*/
-  
-  
+
 
 /*# sourceMappingURL=/styles.b61e60ae.css.map */
