@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-    padding-bottom: .5em;
+    padding-bottom: 2em;
   }
   .all-img-heading{
     text-align: center;
@@ -25,7 +25,17 @@
   opacity: .8;
   transition: .8s ease;
   }
-  
+  #imgButton{
+    width: 140px;
+    height: 40px;
+    align-self: center;
+    font-weight: bold;
+    background-color: white;
+    border: 1px solid;
+  }
+  #imgButton:hover{
+    background-color: rgb(209, 197, 197);
+  }
   @media only screen and (min-width:760px){
   
     .all-img-container{
