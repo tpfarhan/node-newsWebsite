@@ -52,14 +52,6 @@ fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
             }
         }
     })
-    .then((jsonResponse) =>{
-        if(jsonResponse.articles){
-            for(var i = 0; i < 2 ; i++){
-                var newsData = new News(jsonResponse.articles[i]);
-                headLineContainer.appendChild(createHeadlinesPage(newsData))
-            }
-        }
-    })
     .catch((error) => {
         console.log(error);
       });

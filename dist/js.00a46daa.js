@@ -356,13 +356,6 @@ fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
       newsContainer.appendChild((0, _mainNewsContent.createMainNews)(newsData));
     }
   }
-}).then(function (jsonResponse) {
-  if (jsonResponse.articles) {
-    for (var i = 0; i < 2; i++) {
-      var newsData = new _newsAPI.default(jsonResponse.articles[i]);
-      headLineContainer.appendChild((0, _headlineGenerator.createHeadlinesPage)(newsData));
-    }
-  }
 }).catch(function (error) {
   console.log(error);
 });

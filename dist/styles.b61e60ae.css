@@ -218,7 +218,7 @@ body{
     text-decoration: underline rgb(77, 230, 63) 2px;
     text-align: center;
     font-size: .8em;
-    padding-top: 2em;
+    padding-top: 1em;
     padding-bottom: 2em;
     color: black;
   
@@ -248,7 +248,7 @@ body{
   @media only screen and (min-width:851px){
     .news-container{
         display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 400px 400px;
         padding-right: 6.5em;
         padding-left: 5.5em;
     }
