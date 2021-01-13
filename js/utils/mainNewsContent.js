@@ -1,4 +1,3 @@
-import "./mainstyle.css";
 function createMainNews(newsObject){
 
     var singleNews = document.createElement("div"),
@@ -48,7 +47,6 @@ function createMainNews(newsObject){
         newsDataContainer.appendChild(readMore)
 
     return singleNews;
-
 }
 
 export { createMainNews }

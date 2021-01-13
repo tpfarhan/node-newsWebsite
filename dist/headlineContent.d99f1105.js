@@ -117,105 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/models/newsAPI.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var News = function News(newsDataFromAPI) {
-  _classCallCheck(this, News);
-
-  this.source = newsDataFromAPI.source.name;
-  this.author = newsDataFromAPI.author;
-  this.title = newsDataFromAPI.title;
-  this.description = newsDataFromAPI.description;
-  this.newsURL = newsDataFromAPI.url;
-  this.imgURL = newsDataFromAPI.urlToImage;
-  this.date = new Date(newsDataFromAPI.publishedAt);
-  this.content = newsDataFromAPI.content;
-};
-
-var _default = News;
-exports.default = _default;
-},{}],"js/utils/mainNewsContent.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.createMainNews = createMainNews;
-
-function createMainNews(newsObject) {
-  var singleNews = document.createElement("div"),
-      imgContainer = document.createElement("div"),
-      newsImg = document.createElement("img"),
-      newsMeta = document.createElement("div"),
-      newsDate = document.createElement("div"),
-      newsCategory = document.createElement("div"),
-      newsHeading = document.createElement("div"),
-      newsContent = document.createElement("div"),
-      readMoreDiv = document.createElement("div"),
-      readMore = document.createElement("a"),
-      newsDataContainer = document.createElement("div"),
-      divider = document.createElement("div");
-  singleNews.classList.add("single-news");
-  imgContainer.classList.add("news-imgContainer");
-  newsMeta.classList.add("news-meta");
-  newsDate.classList.add("date");
-  newsCategory.classList.add("category");
-  newsHeading.classList.add("news-heading");
-  newsContent.classList.add("news-content");
-  readMoreDiv.classList.add("readMoreDiv");
-  readMore.classList.add("read-more");
-  newsDataContainer.classList.add("newsDataContainer");
-  divider.classList.add("divider");
-  var month = newsObject.date.toLocaleString('default', {
-    month: 'short'
-  });
-  var pubDay = "".concat(month, " ").concat(newsObject.date.getDate(), ", ").concat(newsObject.date.getFullYear(), " ");
-  newsImg.setAttribute("src", newsObject.imgURL);
-  newsDate.innerHTML = pubDay;
-  newsCategory.innerHTML = newsObject.source;
-  newsHeading.innerHTML = newsObject.title;
-  newsContent.innerHTML = newsObject.description;
-  readMore.innerHTML = "Read More";
-  readMore.setAttribute("href", newsObject.newsURL);
-  singleNews.appendChild(imgContainer);
-  imgContainer.appendChild(newsImg);
-  singleNews.appendChild(newsDataContainer);
-  newsDataContainer.appendChild(newsMeta);
-  newsMeta.appendChild(newsDate);
-  newsMeta.appendChild(divider);
-  newsMeta.appendChild(newsCategory);
-  newsDataContainer.appendChild(newsHeading);
-  newsDataContainer.appendChild(newsContent);
-  newsDataContainer.appendChild(readMore);
-  return singleNews;
-}
-},{}],"js/utils/imageGenerator.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.createImage = createImage;
-
-function createImage() {
-  var imgContainer = document.getElementById("all-img-container"),
-      imgDiv = document.createElement("div"),
-      singleImg = document.createElement("img");
-  imgDiv.classList.add("allImgDiv");
-  singleImg.classList.add("singleImg");
-  singleImg.setAttribute("src", "https://picsum.photos/300/300?grayscale");
-  imgDiv.appendChild(singleImg);
-  return imgDiv;
-}
-},{}],"js/utils/headlineGenerator.js":[function(require,module,exports) {
+})({"js/utils/headlineContent.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -233,9 +135,9 @@ function createHeadlinesPage(newsData) {
       headLineDescription = document.createElement("div"),
       readMoreDiv = document.createElement("div"),
       readMoreA = document.createElement("a");
-  console.log("called");
+  headLineContainer.classList.add("headLineContainer");
   singleHeadlineContainer.classList.add("singleHeadlineContainer");
-  headlineImageContainer.classList.add("singleImageContainer");
+  headlineImageContainer.classList.add("singleImageConatiner");
   headLineImage.classList.add("headLineImage");
   headLineDataContainer.classList.add("headLineDataContainer");
   mainHeadLine.classList.add("mainHeadLine");
@@ -243,10 +145,9 @@ function createHeadlinesPage(newsData) {
   readMoreDiv.classList.add("readMoreDiv");
   readMoreA.classList.add("readmoreA");
   headLineImage.setAttribute("src", newsData.imgURL);
-  mainHeadLine.innerHTML = newsData.title;
+  mainHeadLine.innerHTML = newsData.titile;
   headLineDescription.innerHTML = newsData.description;
-  readMoreA.innerHTML = "Read More";
-  readMoreA.setAttribute("href", newsData.newsURL);
+  headLineContainer.appendChild(singleHeadlineContainer);
   singleHeadlineContainer.appendChild(headlineImageContainer);
   headlineImageContainer.appendChild(headLineImage);
   singleHeadlineContainer.appendChild(headLineDataContainer);
@@ -254,140 +155,9 @@ function createHeadlinesPage(newsData) {
   headLineDataContainer.appendChild(headLineDescription);
   headLineDataContainer.appendChild(readMoreDiv);
   readMoreDiv.appendChild(readMoreA);
-  return singleHeadlineContainer;
+  return headLineContainer;
 }
-},{}],"js/utils/allNewsGenerator.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.createAllNews = createAllNews;
-
-function createAllNews(newsObject) {
-  var singleAllNewsContainer = document.createElement("div"),
-      allNewsImgDiv = document.createElement("div"),
-      allNewsImg = document.createElement("img"),
-      allNewsMeta = document.createElement("div"),
-      allNewsDate = document.createElement("div"),
-      allNewsAuthor = document.createElement("div"),
-      metaDivider = document.createElement("div"),
-      allNewsHeadline = document.createElement("div");
-  singleAllNewsContainer.classList.add("singleAllNewsContainer");
-  allNewsImgDiv.classList.add("allNewsImgDiv");
-  allNewsMeta.classList.add("allNewsMeta");
-  allNewsDate.classList.add("allNewsDate");
-  allNewsAuthor.classList.add("allNewsAuthor");
-  metaDivider.classList.add("metaDivider");
-  allNewsHeadline.classList.add("allNewsHeadline");
-  var month = newsObject.date.toLocaleString('default', {
-    month: 'short'
-  });
-  var pubDay = "".concat(month, " ").concat(newsObject.date.getDate(), ", ").concat(newsObject.date.getFullYear(), " ");
-  allNewsImg.setAttribute("src", newsObject.imgURL);
-  allNewsDate.innerHTML = pubDay;
-  allNewsAuthor.innerHTML = newsObject.author;
-  allNewsHeadline.innerHTML = newsObject.title; //readMore.setAttribute("href", newsObject.newsURL)
-
-  singleAllNewsContainer.appendChild(allNewsImgDiv);
-  allNewsImgDiv.appendChild(allNewsImg);
-  singleAllNewsContainer.appendChild(allNewsMeta);
-  allNewsMeta.appendChild(allNewsDate);
-  allNewsMeta.appendChild(metaDivider);
-  allNewsMeta.appendChild(allNewsAuthor);
-  singleAllNewsContainer.appendChild(allNewsHeadline);
-  return singleAllNewsContainer;
-}
-},{}],"js/index.js":[function(require,module,exports) {
-"use strict";
-
-var _newsAPI = _interopRequireDefault(require("./models/newsAPI"));
-
-var _mainNewsContent = require("./utils/mainNewsContent");
-
-var _imageGenerator = require("./utils/imageGenerator");
-
-var _headlineGenerator = require("./utils/headlineGenerator");
-
-var _allNewsGenerator = require("./utils/allNewsGenerator");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var navigation = document.getElementById("navigation"),
-    close = document.getElementById("close"),
-    menuBtn = document.getElementById("menu-btn"),
-    fullOverlay = document.getElementById("overlay"),
-    newsContainer = document.getElementById("news-container");
-var headLineContainer = document.getElementById("headlines-container");
-var allImgContainer = document.getElementById("all-img-container");
-var newsContentContainer = document.getElementById("news-content-container");
-menuBtn.addEventListener("click", function () {
-  navigation.style.width = "15em";
-  fullOverlay.style.display = "block";
-  fullOverlay.classList.remove("fadeout");
-  fullOverlay.classList.add("fadein");
-});
-close.addEventListener("click", function () {
-  navigation.style.width = "0";
-  fullOverlay.classList.add("fadeout");
-  setTimeout(function () {
-    fullOverlay.style.display = "none";
-  }, 1000);
-});
-fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
-  method: "GET"
-}).then(function (response) {
-  return response.json();
-}).then(function (jsonResponse) {
-  if (jsonResponse.articles) {
-    for (var i = 0; i < 6; i++) {
-      var newsData = new _newsAPI.default(jsonResponse.articles[i]);
-      newsContainer.appendChild((0, _mainNewsContent.createMainNews)(newsData));
-    }
-  }
-}).then(function (jsonResponse) {
-  if (jsonResponse.articles) {
-    for (var i = 0; i < 2; i++) {
-      var newsData = new _newsAPI.default(jsonResponse.articles[i]);
-      headLineContainer.appendChild((0, _headlineGenerator.createHeadlinesPage)(newsData));
-    }
-  }
-}).catch(function (error) {
-  console.log(error);
-});
-fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
-  method: "GET"
-}).then(function (response) {
-  return response.json();
-}).then(function (jsonResponse) {
-  if (jsonResponse.articles) {
-    for (var i = 0; i < 2; i++) {
-      var newsData = new _newsAPI.default(jsonResponse.articles[i]);
-      headLineContainer.appendChild((0, _headlineGenerator.createHeadlinesPage)(newsData));
-    }
-  }
-}).catch(function (error) {
-  console.log(error);
-});
-fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
-  method: "GET"
-}).then(function (response) {
-  return response.json();
-}).then(function (jsonResponse) {
-  if (jsonResponse.articles) {
-    for (var i = 0; i < 6; i++) {
-      var newsData = new _newsAPI.default(jsonResponse.articles[i]);
-      newsContentContainer.appendChild((0, _allNewsGenerator.createAllNews)(newsData));
-    }
-  }
-}).catch(function (error) {
-  console.log(error);
-});
-
-for (var i = 0; i < 12; i++) {
-  allImgContainer.appendChild((0, _imageGenerator.createImage)());
-}
-},{"./models/newsAPI":"js/models/newsAPI.js","./utils/mainNewsContent":"js/utils/mainNewsContent.js","./utils/imageGenerator":"js/utils/imageGenerator.js","./utils/headlineGenerator":"js/utils/headlineGenerator.js","./utils/allNewsGenerator":"js/utils/allNewsGenerator.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -415,7 +185,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41665" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39199" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -591,5 +361,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/index.js"], null)
-//# sourceMappingURL=/js.00a46daa.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/utils/headlineContent.js"], null)
+//# sourceMappingURL=/headlineContent.d99f1105.js.map
