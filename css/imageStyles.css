@@ -1,0 +1,43 @@
+.only-image-container{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    padding-bottom: .5em;
+  }
+  .all-img-heading{
+    text-align: center;
+    font-size : 1.8em;
+    padding : 1em;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+  }
+  
+  .all-img-container{
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2em;
+  }
+  .singleImg:hover{
+  cursor: pointer;
+  opacity: .8;
+  transition: .8s ease;
+  }
+  
+  @media only screen and (min-width:760px){
+  
+    .all-img-container{
+      display: grid;
+      grid-template-columns : 300px 300px;
+      grid-gap: 1em;
+    }
+  }
+  @media only screen and (min-width: 1020px){
+    .all-img-container{
+      display: grid;
+      grid-template-columns : 300px 300px 300px;
+      grid-gap: 1em;
+    }
+  }
