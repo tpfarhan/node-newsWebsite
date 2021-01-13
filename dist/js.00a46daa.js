@@ -318,7 +318,8 @@ var navigation = document.getElementById("navigation"),
     close = document.getElementById("close"),
     menuBtn = document.getElementById("menu-btn"),
     fullOverlay = document.getElementById("overlay"),
-    newsContainer = document.getElementById("news-container");
+    newsContainer = document.getElementById("news-container"),
+    imgBtn = document.getElementById("imgButton");
 var headLineContainer = document.getElementById("headlines-container");
 var allImgContainer = document.getElementById("all-img-container");
 var newsContentContainer = document.getElementById("news-content-container");
@@ -388,9 +389,15 @@ fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
   console.log(error);
 });
 
-for (var i = 0; i < 12; i++) {
+for (var i = 0; i < 6; i++) {
   allImgContainer.appendChild((0, _imageGenerator.createImage)());
 }
+
+imgBtn.addEventListener("click", function () {
+  for (var i = 0; i < 6; i++) {
+    allImgContainer.appendChild((0, _imageGenerator.createImage)());
+  }
+});
 },{"./models/newsAPI":"js/models/newsAPI.js","./utils/mainNewsContent":"js/utils/mainNewsContent.js","./utils/imageGenerator":"js/utils/imageGenerator.js","./utils/headlineGenerator":"js/utils/headlineGenerator.js","./utils/allNewsGenerator":"js/utils/allNewsGenerator.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

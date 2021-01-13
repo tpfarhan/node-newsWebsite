@@ -8,7 +8,8 @@ var navigation = document.getElementById("navigation"),
     close= document.getElementById("close"),
     menuBtn = document.getElementById("menu-btn"),
     fullOverlay = document.getElementById("overlay"),
-    newsContainer =document.getElementById("news-container")
+    newsContainer =document.getElementById("news-container"),
+    imgBtn = document.getElementById("imgButton");
 
 
 var headLineContainer = document.getElementById("headlines-container");
@@ -95,6 +96,12 @@ fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
             console.log(error);
           });
 
-      for( var i = 0; i< 12 ;i++){
+      for( var i = 0; i< 6 ;i++){
         allImgContainer.appendChild(createImage())
         }
+
+        imgBtn.addEventListener("click",()=>{
+            for( var i = 0; i< 6 ;i++){
+                allImgContainer.appendChild(createImage())
+                }
+        })
