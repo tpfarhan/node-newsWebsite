@@ -314,25 +314,27 @@ var _allNewsGenerator = require("./utils/allNewsGenerator");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var navigation = document.getElementById("navigation"),
-    navigationFull = document.getElementById("navigation-full"),
     close = document.getElementById("close"),
     menuBtn = document.getElementById("menu-btn"),
     fullOverlay = document.getElementById("overlay"),
     newsContainer = document.getElementById("news-container"),
-    imgBtn = document.getElementById("imgButton");
+    imgBtn = document.getElementById("imgButton"),
+    loader = document.getElementById("loader");
 var headLineContainer = document.getElementById("headlines-container");
 var allImgContainer = document.getElementById("all-img-container");
 var newsContentContainer = document.getElementById("news-content-container");
-/*if(window.matchMedia("(min-width: 1025px)"))
-{
-    navigationFull.classList.remove("hidden")
-    navigation.classList.add("hidden")
-}
-if(window.matchMedia("(max-width: 1024px)")){
-    navigationFull.classList.add("hidden");
-    navigation.classList.remove("hidden");
-}*/
-
+var fullNav = window.matchMedia("(min-width:1025px");
+window.addEventListener("resize", function () {
+  if (fullNav.matches) {
+    fullOverlay.classList.add("fadeout");
+    navigation.style.width = "100%";
+    setTimeout(function () {
+      fullOverlay.style.display = "none";
+    }, 1000);
+  } else {
+    navigation.style.width = "0";
+  }
+});
 menuBtn.addEventListener("click", function () {
   navigation.style.width = "15em";
   fullOverlay.style.display = "block";
@@ -346,58 +348,81 @@ close.addEventListener("click", function () {
     fullOverlay.style.display = "none";
   }, 1000);
 });
-fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
-  method: "GET"
-}).then(function (response) {
-  return response.json();
-}).then(function (jsonResponse) {
-  if (jsonResponse.articles) {
-    for (var i = 0; i < 6; i++) {
-      var newsData = new _newsAPI.default(jsonResponse.articles[i]);
-      newsContainer.appendChild((0, _mainNewsContent.createMainNews)(newsData));
-    }
-  }
-}).catch(function (error) {
-  console.log(error);
-});
-fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
-  method: "GET"
-}).then(function (response) {
-  return response.json();
-}).then(function (jsonResponse) {
-  if (jsonResponse.articles) {
-    for (var i = 0; i < 2; i++) {
-      var newsData = new _newsAPI.default(jsonResponse.articles[i]);
-      headLineContainer.appendChild((0, _headlineGenerator.createHeadlinesPage)(newsData));
-    }
-  }
-}).catch(function (error) {
-  console.log(error);
-});
-fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
-  method: "GET"
-}).then(function (response) {
-  return response.json();
-}).then(function (jsonResponse) {
-  if (jsonResponse.articles) {
-    for (var i = 0; i < 6; i++) {
-      var newsData = new _newsAPI.default(jsonResponse.articles[i]);
-      newsContentContainer.appendChild((0, _allNewsGenerator.createAllNews)(newsData));
-    }
-  }
-}).catch(function (error) {
-  console.log(error);
-});
 
-for (var i = 0; i < 6; i++) {
-  allImgContainer.appendChild((0, _imageGenerator.createImage)());
+if (newsContainer !== null) {
+  loader.classList.remove("hidden");
+  fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
+    method: "GET"
+  }).then(function (response) {
+    return response.json();
+  }).then(function (jsonResponse) {
+    if (jsonResponse.articles) {
+      for (var i = 0; i < 6; i++) {
+        var newsData = new _newsAPI.default(jsonResponse.articles[i]);
+        newsContainer.appendChild((0, _mainNewsContent.createMainNews)(newsData));
+      }
+    }
+  }).then(function () {
+    loader.classList.add("hidden");
+  }).catch(function (error) {
+    console.log(error);
+  });
 }
 
-imgBtn.addEventListener("click", function () {
-  for (var i = 0; i < 6; i++) {
-    allImgContainer.appendChild((0, _imageGenerator.createImage)());
-  }
-});
+if (headLineContainer !== null) {
+  loader.classList.remove("hidden");
+  fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
+    method: "GET"
+  }).then(function (response) {
+    return response.json();
+  }).then(function (jsonResponse) {
+    if (jsonResponse.articles) {
+      for (var i = 0; i < 2; i++) {
+        var newsData = new _newsAPI.default(jsonResponse.articles[i]);
+        headLineContainer.appendChild((0, _headlineGenerator.createHeadlinesPage)(newsData));
+      }
+    }
+  }).then(function () {
+    loader.classList.add("hidden");
+  }).catch(function (error) {
+    console.log(error);
+  });
+}
+
+if (newsContentContainer !== null) {
+  loader.classList.remove("hidden");
+  fetch("https://saurav.tech/NewsAPI/top-headlines/category/general/in.json", {
+    method: "GET"
+  }).then(function (response) {
+    return response.json();
+  }).then(function (jsonResponse) {
+    if (jsonResponse.articles) {
+      for (var i = 0; i < 6; i++) {
+        var newsData = new _newsAPI.default(jsonResponse.articles[i]);
+        newsContentContainer.appendChild((0, _allNewsGenerator.createAllNews)(newsData));
+      }
+    }
+  }).then(function () {
+    loader.classList.add("hidden");
+  }).catch(function (error) {
+    console.log(error);
+  });
+}
+
+if (allImgContainer !== null) {
+  loader.classList.remove("hidden");
+  setTimeout(function () {
+    for (var i = 0; i < 6; i++) {
+      allImgContainer.appendChild((0, _imageGenerator.createImage)(i));
+      loader.classList.add("hidden");
+    }
+  }, 4000);
+  imgBtn.addEventListener("click", function () {
+    for (var i = 0; i < 6; i++) {
+      allImgContainer.appendChild((0, _imageGenerator.createImage)());
+    }
+  });
+}
 },{"./models/newsAPI":"js/models/newsAPI.js","./utils/mainNewsContent":"js/utils/mainNewsContent.js","./utils/imageGenerator":"js/utils/imageGenerator.js","./utils/headlineGenerator":"js/utils/headlineGenerator.js","./utils/allNewsGenerator":"js/utils/allNewsGenerator.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -426,7 +451,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43479" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43229" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

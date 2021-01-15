@@ -54,6 +54,10 @@
   }
   .headLineDescription{
     font-size : .6em;
+    height:6em;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .readMoreDiv a{
     position: absolute;

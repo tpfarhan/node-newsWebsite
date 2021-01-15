@@ -60,7 +60,7 @@
   .metaDivider {
     width: 2px;
     height: .7em;
-    margin: 6px -5px;
+    margin: 5px;
     background: rgb(129, 122, 122);
   }
   
@@ -69,6 +69,10 @@
     padding-left: 1em;
     padding-right: 1em;
     padding-bottom: 1em;
+    height:4em;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   @media only screen and (min-width:760px){
